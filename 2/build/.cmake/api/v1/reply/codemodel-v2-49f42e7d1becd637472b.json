@@ -1,0 +1,201 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						4
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "glfw_build",
+					"childIndexes" : 
+					[
+						2,
+						3
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-glfw_build-Debug-9bbd9bd0f8cd9e6322c1.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "thirdparty/glfw-3.4",
+					"targetIndexes" : 
+					[
+						4
+					]
+				},
+				{
+					"build" : "glfw_build/src",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-glfw_build.src-Debug-75b426d31a92d177eb17.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 1,
+					"source" : "thirdparty/glfw-3.4/src",
+					"targetIndexes" : 
+					[
+						3,
+						5
+					]
+				},
+				{
+					"build" : "glfw_build/docs",
+					"jsonFile" : "directory-glfw_build.docs-Debug-2837f12829f141a30230.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 1,
+					"source" : "thirdparty/glfw-3.4/docs"
+				},
+				{
+					"build" : "glew_build",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-glew_build-Debug-6455d4ca318ae08e4f42.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.6"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 2,
+					"source" : "thirdparty/glew/build/cmake",
+					"targetIndexes" : 
+					[
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "GameDevelopmentProject",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						1,
+						2,
+						3
+					],
+					"name" : "GLFW",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						3,
+						4,
+						5
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						4
+					],
+					"name" : "glew",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "GameDevelopmentProject::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-GameDevelopmentProject-Debug-f93160c0c1999ccfb2ee.json",
+					"name" : "GameDevelopmentProject",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "glew::@d19f19d027ebb9a87ff6",
+					"jsonFile" : "target-glew-Debug-e0a6f3415c1b7881447c.json",
+					"name" : "glew",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "glew_s::@d19f19d027ebb9a87ff6",
+					"jsonFile" : "target-glew_s-Debug-1f71a43aca85aba2419d.json",
+					"name" : "glew_s",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "glfw::@9d7e251a3367c234290d",
+					"jsonFile" : "target-glfw-Debug-6973a3483f28517a31da.json",
+					"name" : "glfw",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "uninstall::@97b88ff70bc8a62a1e37",
+					"jsonFile" : "target-uninstall-Debug-623bd1ece4d12444ef02.json",
+					"name" : "uninstall",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "update_mappings::@9d7e251a3367c234290d",
+					"jsonFile" : "target-update_mappings-Debug-768e1cd9aef608af7dd6.json",
+					"name" : "update_mappings",
+					"projectIndex" : 1
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/florybal/cursos/game_development/2/build",
+		"source" : "/home/florybal/cursos/game_development/2"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

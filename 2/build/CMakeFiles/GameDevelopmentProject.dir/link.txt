@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/GameDevelopmentProject.dir/source/main.cpp.o -o GameDevelopmentProject  glfw_build/src/libglfw3.a lib/libGLEW.a -lnvidia-ml /usr/lib/x86_64-linux-gnu/librt.a -lm -ldl /usr/lib/x86_64-linux-gnu/libOpenGL.so /usr/lib/x86_64-linux-gnu/libGLX.so /usr/lib/x86_64-linux-gnu/libGLU.so 

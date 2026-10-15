@@ -1,44 +1,47 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include "consumo.cpp"
 #include <iostream>
 #include <unistd.h> 
+#include <cmath>
+#include  <map>
+#include <random>
+#include <chrono>
 #include <vector>
 #include <string>
 
-void consumo()
+struct Vec2
 {
-  nvmlDevice_t device = getNVMLDevice();
+  float x = 0.0f;
+  float y = 0.0;
+};
 
-  if (device == nullptr)
-    return;
+Vec2 offset;
 
-  nvmlMemory_t memory;
-  nvmlReturn_t result = nvmlDeviceGetMemoryInfo(device, &memory);
-  if (result != NVML_SUCCESS)
+void keyCallback(GLFWwindow* window, int key, int scanCode, int action, int mods)
+{
+  if (action == GLFW_PRESS)
   {
-      std::cerr << "Erro ao obter memoria da GPU: "
-                << nvmlErrorString(result)
-                << std::endl;
-      return;
-  }
-  CpuSnapshot lastSnap = getCpuSnapshot();
-  
-  sleep(1); 
-  
-  CpuSnapshot currentSnap = getCpuSnapshot();
-  double cpuPercent = calculateCpuPercent(currentSnap, lastSnap);
-  
-  MemoryInfo mem = getProcessMemory();
-  
-  std::cout << "=== Status da Game Engine ===" << std::endl;
-  std::cout << "CPU: " << cpuPercent << "%" << std::endl; 
-  std::cout << "RAM: " << mem.rss_kb / 1024.0 << " MB" << std::endl;
-  std::cout << "Virtual: " << mem.virtual_kb / 1024.0 << " MB" << std::endl;
-  std::cout << "VRAM Total: "<< memory.total / (1024.0 * 1024.0)<< " MB" << std::endl;
-  std::cout << "VRAM Usada: "<< memory.used / (1024.0 * 1024.0)<< " MB" << std::endl;
+    switch(key)
+    {
+    case GLFW_KEY_UP:
+        offset.y += 0.01f;
+        break;
+    case GLFW_KEY_DOWN:
+        offset.y -= 0.01f;
+        break;
+    case GLFW_KEY_LEFT:
+        offset.x += 0.01f;
+        break;
+    case GLFW_KEY_RIGHT:
+        offset.x -= 0.01f;
+        break;
 
+    default:
+        break;
+    }
+  }
 }
+
 
 int main() 
 {
@@ -62,7 +65,10 @@ int main()
     return -1;
   }
 
-   //dizendo qual janela será associada ao contexto do OpenGL, nesse caso a janela criada pelo GLFW
+  glfwSetKeyCallback(window, keyCallback);
+
+  //dizendo qual janela será associada ao contexto do OpenGL, nesse caso a janela criada pelo GLFW
+  //glfwSetWindowPos(window, 2000, 150);
   glfwMakeContextCurrent(window);
 
   //Iniciando GLEW para usar as funções do OpenGL
@@ -79,12 +85,14 @@ int main()
 	layout(location = 0) in vec3 position;
   layout(location = 1) in vec3 color;
 
+  uniform vec2 uOffset;
+
   out vec3 vColor;
 	
   void main()
   {
     vColor = color;
-		gl_Position = vec4(position.x, position.y, position.z, 1.0);
+		gl_Position = vec4(position.x + uOffset.x, position.y + uOffset.y, position.z, 1.0);
   }
   )";
 
@@ -204,6 +212,9 @@ int main()
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   glBindVertexArray(0);
 
+  GLint uColorLoc = glGetUniformLocation(shaderProgram, "uColor");
+  GLint uOffsetLoc = glGetUniformLocation(shaderProgram, "uOffset");
+
   while (!glfwWindowShouldClose(window))
   {
     glClearColor(0.0f, 0.1f, 0.1f, 1.0f);
@@ -215,23 +226,13 @@ int main()
       mostrando frames incompletos
     */
     glUseProgram(shaderProgram);
+    glUniform4f(uColorLoc, 0.0f, 1.0f, 0.0f, 1.0f);
+    glUniform2f(uOffsetLoc, offset.x, offset.y);
     glBindVertexArray(vao);
     glDrawArrays(GL_TRIANGLES, 0, 3);
     glfwSwapBuffers(window); 
 
     glfwPollEvents();
-    static auto ultimoMonitoramento =
-        std::chrono::steady_clock::now();
-
-    auto agora = std::chrono::steady_clock::now();
-
-    if (std::chrono::duration_cast<std::chrono::seconds>(
-            agora - ultimoMonitoramento
-        ).count() >= 1)
-    {
-        consumo();
-        ultimoMonitoramento = agora;
-}
   }
 
   glfwTerminate();
